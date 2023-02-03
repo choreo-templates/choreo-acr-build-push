@@ -1,7 +1,7 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 513:
+/***/ 174:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -28,7 +28,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.issue = exports.issueCommand = void 0;
 const os = __importStar(__nccwpck_require__(37));
-const utils_1 = __nccwpck_require__(75);
+const utils_1 = __nccwpck_require__(51);
 /**
  * Commands
  *
@@ -100,7 +100,7 @@ function escapeProperty(s) {
 
 /***/ }),
 
-/***/ 719:
+/***/ 77:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -135,12 +135,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getIDToken = exports.getState = exports.saveState = exports.group = exports.endGroup = exports.startGroup = exports.info = exports.notice = exports.warning = exports.error = exports.debug = exports.isDebug = exports.setFailed = exports.setCommandEcho = exports.setOutput = exports.getBooleanInput = exports.getMultilineInput = exports.getInput = exports.addPath = exports.setSecret = exports.exportVariable = exports.ExitCode = void 0;
-const command_1 = __nccwpck_require__(513);
-const file_command_1 = __nccwpck_require__(296);
-const utils_1 = __nccwpck_require__(75);
+const command_1 = __nccwpck_require__(174);
+const file_command_1 = __nccwpck_require__(115);
+const utils_1 = __nccwpck_require__(51);
 const os = __importStar(__nccwpck_require__(37));
 const path = __importStar(__nccwpck_require__(17));
-const oidc_utils_1 = __nccwpck_require__(666);
+const oidc_utils_1 = __nccwpck_require__(894);
 /**
  * The code to exit an action
  */
@@ -425,17 +425,17 @@ exports.getIDToken = getIDToken;
 /**
  * Summary exports
  */
-var summary_1 = __nccwpck_require__(500);
+var summary_1 = __nccwpck_require__(570);
 Object.defineProperty(exports, "summary", ({ enumerable: true, get: function () { return summary_1.summary; } }));
 /**
  * @deprecated use core.summary
  */
-var summary_2 = __nccwpck_require__(500);
+var summary_2 = __nccwpck_require__(570);
 Object.defineProperty(exports, "markdownSummary", ({ enumerable: true, get: function () { return summary_2.markdownSummary; } }));
 /**
  * Path exports
  */
-var path_utils_1 = __nccwpck_require__(861);
+var path_utils_1 = __nccwpck_require__(381);
 Object.defineProperty(exports, "toPosixPath", ({ enumerable: true, get: function () { return path_utils_1.toPosixPath; } }));
 Object.defineProperty(exports, "toWin32Path", ({ enumerable: true, get: function () { return path_utils_1.toWin32Path; } }));
 Object.defineProperty(exports, "toPlatformPath", ({ enumerable: true, get: function () { return path_utils_1.toPlatformPath; } }));
@@ -443,7 +443,7 @@ Object.defineProperty(exports, "toPlatformPath", ({ enumerable: true, get: funct
 
 /***/ }),
 
-/***/ 296:
+/***/ 115:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -474,8 +474,8 @@ exports.prepareKeyValueMessage = exports.issueFileCommand = void 0;
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const fs = __importStar(__nccwpck_require__(147));
 const os = __importStar(__nccwpck_require__(37));
-const uuid_1 = __nccwpck_require__(305);
-const utils_1 = __nccwpck_require__(75);
+const uuid_1 = __nccwpck_require__(641);
+const utils_1 = __nccwpck_require__(51);
 function issueFileCommand(command, message) {
     const filePath = process.env[`GITHUB_${command}`];
     if (!filePath) {
@@ -508,7 +508,7 @@ exports.prepareKeyValueMessage = prepareKeyValueMessage;
 
 /***/ }),
 
-/***/ 666:
+/***/ 894:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -524,9 +524,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.OidcClient = void 0;
-const http_client_1 = __nccwpck_require__(772);
-const auth_1 = __nccwpck_require__(703);
-const core_1 = __nccwpck_require__(719);
+const http_client_1 = __nccwpck_require__(311);
+const auth_1 = __nccwpck_require__(669);
+const core_1 = __nccwpck_require__(77);
 class OidcClient {
     static createHttpClient(allowRetry = true, maxRetry = 10) {
         const requestOptions = {
@@ -592,7 +592,7 @@ exports.OidcClient = OidcClient;
 
 /***/ }),
 
-/***/ 861:
+/***/ 381:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -657,7 +657,7 @@ exports.toPlatformPath = toPlatformPath;
 
 /***/ }),
 
-/***/ 500:
+/***/ 570:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -947,7 +947,7 @@ exports.summary = _summary;
 
 /***/ }),
 
-/***/ 75:
+/***/ 51:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -994,7 +994,7 @@ exports.toCommandProperties = toCommandProperties;
 
 /***/ }),
 
-/***/ 703:
+/***/ 669:
 /***/ (function(__unused_webpack_module, exports) {
 
 "use strict";
@@ -1082,7 +1082,7 @@ exports.PersonalAccessTokenCredentialHandler = PersonalAccessTokenCredentialHand
 
 /***/ }),
 
-/***/ 772:
+/***/ 311:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -1119,9 +1119,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.HttpClient = exports.isHttps = exports.HttpClientResponse = exports.HttpClientError = exports.getProxyUrl = exports.MediaTypes = exports.Headers = exports.HttpCodes = void 0;
 const http = __importStar(__nccwpck_require__(685));
-const https = __importStar(__nccwpck_require__(241));
-const pm = __importStar(__nccwpck_require__(761));
-const tunnel = __importStar(__nccwpck_require__(254));
+const https = __importStar(__nccwpck_require__(687));
+const pm = __importStar(__nccwpck_require__(82));
+const tunnel = __importStar(__nccwpck_require__(251));
 var HttpCodes;
 (function (HttpCodes) {
     HttpCodes[HttpCodes["OK"] = 200] = "OK";
@@ -1694,7 +1694,7 @@ const lowercaseKeys = (obj) => Object.keys(obj).reduce((c, k) => ((c[k.toLowerCa
 
 /***/ }),
 
-/***/ 761:
+/***/ 82:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -1762,7 +1762,7 @@ exports.checkBypass = checkBypass;
 
 /***/ }),
 
-/***/ 953:
+/***/ 67:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -1946,7 +1946,7 @@ exports.getCmdPath = getCmdPath;
 
 /***/ }),
 
-/***/ 984:
+/***/ 489:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -1985,7 +1985,7 @@ const assert_1 = __nccwpck_require__(491);
 const childProcess = __importStar(__nccwpck_require__(81));
 const path = __importStar(__nccwpck_require__(17));
 const util_1 = __nccwpck_require__(837);
-const ioUtil = __importStar(__nccwpck_require__(953));
+const ioUtil = __importStar(__nccwpck_require__(67));
 const exec = util_1.promisify(childProcess.exec);
 const execFile = util_1.promisify(childProcess.execFile);
 /**
@@ -2294,15 +2294,15 @@ function copyFile(srcFile, destFile, force) {
 
 /***/ }),
 
-/***/ 254:
+/***/ 251:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-module.exports = __nccwpck_require__(468);
+module.exports = __nccwpck_require__(272);
 
 
 /***/ }),
 
-/***/ 468:
+/***/ 272:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -2311,7 +2311,7 @@ module.exports = __nccwpck_require__(468);
 var net = __nccwpck_require__(808);
 var tls = __nccwpck_require__(404);
 var http = __nccwpck_require__(685);
-var https = __nccwpck_require__(241);
+var https = __nccwpck_require__(687);
 var events = __nccwpck_require__(361);
 var assert = __nccwpck_require__(491);
 var util = __nccwpck_require__(837);
@@ -2574,7 +2574,7 @@ exports.debug = debug; // for test
 
 /***/ }),
 
-/***/ 305:
+/***/ 641:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -2638,29 +2638,29 @@ Object.defineProperty(exports, "parse", ({
   }
 }));
 
-var _v = _interopRequireDefault(__nccwpck_require__(587));
+var _v = _interopRequireDefault(__nccwpck_require__(679));
 
-var _v2 = _interopRequireDefault(__nccwpck_require__(409));
+var _v2 = _interopRequireDefault(__nccwpck_require__(105));
 
-var _v3 = _interopRequireDefault(__nccwpck_require__(805));
+var _v3 = _interopRequireDefault(__nccwpck_require__(349));
 
-var _v4 = _interopRequireDefault(__nccwpck_require__(762));
+var _v4 = _interopRequireDefault(__nccwpck_require__(693));
 
-var _nil = _interopRequireDefault(__nccwpck_require__(917));
+var _nil = _interopRequireDefault(__nccwpck_require__(482));
 
-var _version = _interopRequireDefault(__nccwpck_require__(180));
+var _version = _interopRequireDefault(__nccwpck_require__(715));
 
-var _validate = _interopRequireDefault(__nccwpck_require__(956));
+var _validate = _interopRequireDefault(__nccwpck_require__(700));
 
-var _stringify = _interopRequireDefault(__nccwpck_require__(441));
+var _stringify = _interopRequireDefault(__nccwpck_require__(253));
 
-var _parse = _interopRequireDefault(__nccwpck_require__(181));
+var _parse = _interopRequireDefault(__nccwpck_require__(216));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
 
-/***/ 687:
+/***/ 156:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -2690,7 +2690,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 917:
+/***/ 482:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -2705,7 +2705,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 181:
+/***/ 216:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -2716,7 +2716,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = void 0;
 
-var _validate = _interopRequireDefault(__nccwpck_require__(956));
+var _validate = _interopRequireDefault(__nccwpck_require__(700));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2757,7 +2757,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 42:
+/***/ 26:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -2772,7 +2772,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 597:
+/***/ 217:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -2803,7 +2803,7 @@ function rng() {
 
 /***/ }),
 
-/***/ 980:
+/***/ 633:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -2833,7 +2833,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 441:
+/***/ 253:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -2844,7 +2844,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = void 0;
 
-var _validate = _interopRequireDefault(__nccwpck_require__(956));
+var _validate = _interopRequireDefault(__nccwpck_require__(700));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2879,7 +2879,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 587:
+/***/ 679:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -2890,9 +2890,9 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = void 0;
 
-var _rng = _interopRequireDefault(__nccwpck_require__(597));
+var _rng = _interopRequireDefault(__nccwpck_require__(217));
 
-var _stringify = _interopRequireDefault(__nccwpck_require__(441));
+var _stringify = _interopRequireDefault(__nccwpck_require__(253));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2993,7 +2993,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 409:
+/***/ 105:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -3004,9 +3004,9 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = void 0;
 
-var _v = _interopRequireDefault(__nccwpck_require__(632));
+var _v = _interopRequireDefault(__nccwpck_require__(70));
 
-var _md = _interopRequireDefault(__nccwpck_require__(687));
+var _md = _interopRequireDefault(__nccwpck_require__(156));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3016,7 +3016,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 632:
+/***/ 70:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -3028,9 +3028,9 @@ Object.defineProperty(exports, "__esModule", ({
 exports["default"] = _default;
 exports.URL = exports.DNS = void 0;
 
-var _stringify = _interopRequireDefault(__nccwpck_require__(441));
+var _stringify = _interopRequireDefault(__nccwpck_require__(253));
 
-var _parse = _interopRequireDefault(__nccwpck_require__(181));
+var _parse = _interopRequireDefault(__nccwpck_require__(216));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3101,7 +3101,7 @@ function _default(name, version, hashfunc) {
 
 /***/ }),
 
-/***/ 805:
+/***/ 349:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -3112,9 +3112,9 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = void 0;
 
-var _rng = _interopRequireDefault(__nccwpck_require__(597));
+var _rng = _interopRequireDefault(__nccwpck_require__(217));
 
-var _stringify = _interopRequireDefault(__nccwpck_require__(441));
+var _stringify = _interopRequireDefault(__nccwpck_require__(253));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3145,7 +3145,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 762:
+/***/ 693:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -3156,9 +3156,9 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = void 0;
 
-var _v = _interopRequireDefault(__nccwpck_require__(632));
+var _v = _interopRequireDefault(__nccwpck_require__(70));
 
-var _sha = _interopRequireDefault(__nccwpck_require__(980));
+var _sha = _interopRequireDefault(__nccwpck_require__(633));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3168,7 +3168,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 956:
+/***/ 700:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -3179,7 +3179,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = void 0;
 
-var _regex = _interopRequireDefault(__nccwpck_require__(42));
+var _regex = _interopRequireDefault(__nccwpck_require__(26));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3192,7 +3192,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 180:
+/***/ 715:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -3203,7 +3203,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = void 0;
 
-var _validate = _interopRequireDefault(__nccwpck_require__(956));
+var _validate = _interopRequireDefault(__nccwpck_require__(700));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3268,7 +3268,7 @@ module.exports = require("http");
 
 /***/ }),
 
-/***/ 241:
+/***/ 687:
 /***/ ((module) => {
 
 "use strict";
@@ -3357,8 +3357,8 @@ module.exports = require("util");
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-const core = __nccwpck_require__(719);
-const io = __nccwpck_require__(984);
+const core = __nccwpck_require__(77);
+const io = __nccwpck_require__(489);
 const { spawn } = __nccwpck_require__(81);
 const fs = __nccwpck_require__(147);
 const path = __nccwpck_require__(17);
@@ -3367,44 +3367,82 @@ const choreoApp = process.env.CHOREO_GITOPS_REPO;
 
 async function run() {
   try {
-    const fileContents = fs.readFileSync(`/home/runner/workspace/${choreoApp}/${process.env.REG_CRED_FILE_NAME}`, 'utf8');
+    const fileContents = fs.readFileSync(
+      `/home/runner/workspace/${choreoApp}/${process.env.REG_CRED_FILE_NAME}`,
+      "utf8"
+    );
     let data = JSON.parse(fileContents);
     for (const cred of data) {
-      if (cred.type == 'ACR') {
+      if (cred.type == "ACR") {
         await acrLogin(cred);
         await dockerPush(cred);
-      };
-      if (cred.type == 'ECR') {
-        await ecrLogin(cred);
+      }
+      if (cred.type == "ECR") {
+        await ecrLoginPrivate(cred);
         await dockerPush(cred);
-      };
+      }
     }
   } catch (error) {
     core.setFailed(error.message);
   }
 }
 
-async function ecrLogin(cred) {
+async function ecrLoginPrivate(cred) {
   const username = cred.credentials.registryUser;
   const password = cred.credentials.registryPassword;
   const region = cred.credentials.region;
+  const registry = cred.credentials.registry;
 
-  var child = spawn(`aws configure set aws_access_key_id ${username} && aws configure set aws_secret_access_key ${password} && aws configure set default.region ${region} && aws ecr-public get-login-password --region ${region} | docker login --username AWS --password-stdin public.ecr.aws && aws ecr-public describe-repositories --repository-names ${choreoApp} || aws ecr-public create-repository --repository-name ${choreoApp}`,
+  var child = spawn(
+    `aws configure set aws_access_key_id ${username} && aws configure set aws_secret_access_key ${password} && aws configure set default.region ${region} && aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${registry} && aws ecr describe-repositories --repository-names ${choreoApp} || aws ecr create-repository --image-scanning-configuration scanOnPush=true --repository-name ${choreoApp}`,
     {
-      shell: true
-    });
+      shell: true,
+    }
+  );
   var data = "";
   for await (const chunk of child.stdout) {
-    console.log('stdout chunk: ' + chunk);
+    console.log("stdout chunk: " + chunk);
     data += chunk;
   }
   var error = "";
   for await (const chunk of child.stderr) {
-    console.error('stderr chunk: ' + chunk);
+    console.error("stderr chunk: " + chunk);
     error += chunk;
   }
   const exitCode = await new Promise((resolve, reject) => {
-    child.on('close', resolve);
+    child.on("close", resolve);
+  });
+
+  if (exitCode) {
+    throw new Error(`subprocess error exit ${exitCode}, ${error}`);
+  }
+  return data;
+}
+
+// Deprecated: Please implment this feature
+async function ecrLoginPublic(cred) {
+  const username = cred.credentials.registryUser;
+  const password = cred.credentials.registryPassword;
+  const region = cred.credentials.region;
+
+  var child = spawn(
+    `aws configure set aws_access_key_id ${username} && aws configure set aws_secret_access_key ${password} && aws configure set default.region ${region} && aws ecr-public get-login-password --region ${region} | docker login --username AWS --password-stdin public.ecr.aws && aws ecr-public describe-repositories --repository-names ${choreoApp} || aws ecr-public create-repository --repository-name ${choreoApp}`,
+    {
+      shell: true,
+    }
+  );
+  var data = "";
+  for await (const chunk of child.stdout) {
+    console.log("stdout chunk: " + chunk);
+    data += chunk;
+  }
+  var error = "";
+  for await (const chunk of child.stderr) {
+    console.error("stderr chunk: " + chunk);
+    error += chunk;
+  }
+  const exitCode = await new Promise((resolve, reject) => {
+    child.on("close", resolve);
   });
 
   if (exitCode) {
@@ -3418,38 +3456,41 @@ async function acrLogin(cred) {
     const username = cred.credentials.registryUser;
     const password = cred.credentials.registryPassword;
     const loginServer = cred.credentials.registry;
-    const authenticationToken = Buffer.from(`${username}:${password}`).toString('base64');
+    const authenticationToken = Buffer.from(`${username}:${password}`).toString(
+      "base64"
+    );
     let config;
-    const runnerTempDirectory = process.env['RUNNER_TEMP']; // Using process.env until the core libs are updated
-    const dirPath = process.env['DOCKER_CONFIG'] || path.join(runnerTempDirectory, `docker_login_${Date.now()}`);
+    const runnerTempDirectory = process.env["RUNNER_TEMP"]; // Using process.env until the core libs are updated
+    const dirPath =
+      process.env["DOCKER_CONFIG"] ||
+      path.join(runnerTempDirectory, `docker_login_${Date.now()}`);
     await io.mkdirP(dirPath);
     const dockerConfigPath = path.join(dirPath, `config.json`);
     if (fs.existsSync(dockerConfigPath)) {
       try {
-        config = JSON.parse(fs.readFileSync(dockerConfigPath, 'utf8'));
+        config = JSON.parse(fs.readFileSync(dockerConfigPath, "utf8"));
         if (!config.auths) {
           config.auths = {};
         }
         config.auths[loginServer] = { auth: authenticationToken };
-      }
-      catch (err) {
+      } catch (err) {
         // if the file is invalid, just overwrite it
         config = undefined;
       }
     }
     if (!config) {
       config = {
-        "auths": {
+        auths: {
           [loginServer]: {
-            auth: authenticationToken
-          }
-        }
+            auth: authenticationToken,
+          },
+        },
       };
     }
     core.debug(`Writing docker config contents to ${dockerConfigPath}`);
     fs.writeFileSync(dockerConfigPath, JSON.stringify(config));
-    core.exportVariable('DOCKER_CONFIG', dirPath);
-    console.log('DOCKER_CONFIG environment variable is set');
+    core.exportVariable("DOCKER_CONFIG", dirPath);
+    console.log("DOCKER_CONFIG environment variable is set");
   } catch (error) {
     core.setFailed(error);
   }
@@ -3459,21 +3500,24 @@ async function dockerPush(cred) {
   const tempImage = process.env.DOCKER_TEMP_IMAGE;
   const newImageTag = `${cred.credentials.registry}/${choreoApp}:${process.env.NEW_SHA}`;
   // Pushing images to Registory
-  var child = spawn(`docker image tag ${tempImage} ${newImageTag} && docker push ${newImageTag}`, {
-    shell: true
-  });
+  var child = spawn(
+    `docker image tag ${tempImage} ${newImageTag} && docker push ${newImageTag}`,
+    {
+      shell: true,
+    }
+  );
   var data = "";
   for await (const chunk of child.stdout) {
-    console.log('stdout chunk: ' + chunk);
+    console.log("stdout chunk: " + chunk);
     data += chunk;
   }
   var error = "";
   for await (const chunk of child.stderr) {
-    console.error('stderr chunk: ' + chunk);
+    console.error("stderr chunk: " + chunk);
     error += chunk;
   }
   const exitCode = await new Promise((resolve, reject) => {
-    child.on('close', resolve);
+    child.on("close", resolve);
   });
 
   if (exitCode) {

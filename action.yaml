@@ -2,4 +2,4 @@ name: "Choreo Image Push"
 description: "login and push images to container registries"
 runs:
   using: "node16"
-  main: "index.js"
+  main: "dist/index.js"
