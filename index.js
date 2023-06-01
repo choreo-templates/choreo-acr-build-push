@@ -22,6 +22,9 @@ async function run() {
         await ecrLoginPrivate(cred);
         await dockerPush(cred);
       }
+      if (cred.type == "GCP") {
+        await setupGcpArtifactRegistry(cred);
+      }
     }
   } catch (error) {
     core.setFailed(error.message);
@@ -139,10 +142,11 @@ async function acrLogin(cred) {
 
 async function dockerPush(cred) {
   const tempImage = process.env.DOCKER_TEMP_IMAGE;
-  const newImageTag = `${cred.credentials.registry}/${choreoApp}:${process.env.NEW_SHA}`;
+  const registryUrl = cred.credentials.registry;
+  const newImageTag = `${registryUrl}/${choreoApp}:${process.env.NEW_SHA}`;
   // Pushing images to Registory
   var child = spawn(
-    `docker image tag ${tempImage} ${newImageTag} && docker push ${newImageTag}`,
+    `docker image tag ${tempImage} ${newImageTag} && docker push ${newImageTag} && docker logout ${registryUrl}`,
     {
       shell: true,
     }
@@ -155,6 +159,44 @@ async function dockerPush(cred) {
   var error = "";
   for await (const chunk of child.stderr) {
     console.error("stderr chunk: " + chunk);
+    error += chunk;
+  }
+  const exitCode = await new Promise((resolve, reject) => {
+    child.on("close", resolve);
+  });
+
+  if (exitCode) {
+    throw new Error(`subprocess error exit ${exitCode}, ${error}`);
+  }
+  return data;
+}
+
+
+async function setupGcpArtifactRegistry(cred) {
+  const registryPassword = cred.credentials.registryPassword;
+  const keyContex = Buffer.from(registryPassword, 'base64').toString();
+  const region = cred.credentials.region;
+  const registry = cred.credentials.registry;
+  const repository = cred.credentials.repository;
+  const projectId = JSON.parse(keyContex)['project_id'];
+  const newImageTag = `${region}-docker.pkg.dev/${projectId}/${repository}/${choreoApp}:${process.env.NEW_SHA}`;
+  const keyPath = 'gcp-key.json';
+  const shellScriptPath = './scripts/gcp-artifact-registry-push.sh';
+
+  fs.writeFileSync(keyPath, keyContex, 'utf-8');
+
+  fs.chmodSync(shellScriptPath, "755");
+  var child = spawn(`${shellScriptPath} ${keyPath} ${projectId} ${region} ${registry} ${choreoApp} ${newImageTag}`,{
+    shell: true
+  });
+  var data = "";
+  for await (const chunk of child.stdout) {
+    console.log(chunk.toString());
+    data += chunk;
+  }
+  var error = "";
+  for await (const chunk of child.stderr) {
+    console.error(chunk.toString());
     error += chunk;
   }
   const exitCode = await new Promise((resolve, reject) => {
