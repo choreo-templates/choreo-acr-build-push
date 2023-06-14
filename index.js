@@ -186,7 +186,13 @@ async function setupGcpArtifactRegistry(cred) {
   fs.writeFileSync(keyPath, keyContex, 'utf-8');
 
   fs.chmodSync(shellScriptPath, "755");
-  var child = spawn(`${shellScriptPath} ${keyPath} ${projectId} ${region} ${registry} ${choreoApp} ${newImageTag}`,{
+  var child = spawn(`
+    cat ${keyPath} | docker login -u _json_key --password-stdin ${registry} && \
+    docker image tag ${process.env.DOCKER_TEMP_IMAGE}  ${newImageTag} && \
+    docker push ${newImageTag} && \
+    docker logout ${registry} && \
+    rm -rf gcp-key.json`,
+    {
     shell: true
   });
   var data = "";
