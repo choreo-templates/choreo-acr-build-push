@@ -181,7 +181,7 @@ async function setupGcpArtifactRegistry(cred) {
   const projectId = JSON.parse(keyContex)['project_id'];
   const newImageTag = `${region}-docker.pkg.dev/${projectId}/${repository}/${choreoApp}:${process.env.NEW_SHA}`;
   const keyPath = 'gcp-key.json';
-  const shellScriptPath = './scripts/gcp-artifact-registry-push.sh';
+  const shellScriptPath = '../scripts/gcp-artifact-registry-push.sh';
 
   fs.writeFileSync(keyPath, keyContex, 'utf-8');
 
