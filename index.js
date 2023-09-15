@@ -14,7 +14,7 @@ async function run() {
     );
     let data = JSON.parse(fileContents);
     for (const cred of data) {
-      if (cred.type == "ACR") {
+      if (cred.type == "ACR" || cred.type == "DOCKER_HUB") {
         await acrLogin(cred);
         await dockerPush(cred);
       }
