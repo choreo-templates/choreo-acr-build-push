@@ -3373,7 +3373,7 @@ async function run() {
     );
     let data = JSON.parse(fileContents);
     for (const cred of data) {
-      if (cred.type == "ACR" || cred.type == "DOCKER_HUB") {
+      if (cred.type == "ACR") {
         await acrLogin(cred);
         await dockerPush(cred);
       }
@@ -3383,6 +3383,10 @@ async function run() {
       }
       if (cred.type == "GCP") {
         await setupGcpArtifactRegistry(cred);
+      }
+      if (cred.type == "DOCKER_HUB") {
+        await dockerHubLogin(cred);
+        await dockerPush(cred);
       }
     }
   } catch (error) {
@@ -3452,6 +3456,51 @@ async function ecrLoginPublic(cred) {
     throw new Error(`subprocess error exit ${exitCode}, ${error}`);
   }
   return data;
+}
+
+async function dockerHubLogin(cred) {
+  try {
+    const username = cred.credentials.registryUser;
+    const password = cred.credentials.registryPassword;
+    const loginServer = "https://index.docker.io/v1/";
+    const authenticationToken = Buffer.from(`${username}:${password}`).toString(
+      "base64"
+    );
+    let config;
+    const runnerTempDirectory = process.env["RUNNER_TEMP"]; // Using process.env until the core libs are updated
+    const dirPath =
+      process.env["DOCKER_CONFIG"] ||
+      path.join(runnerTempDirectory, `docker_login_${Date.now()}`);
+    await io.mkdirP(dirPath);
+    const dockerConfigPath = path.join(dirPath, `config.json`);
+    if (fs.existsSync(dockerConfigPath)) {
+      try {
+        config = JSON.parse(fs.readFileSync(dockerConfigPath, "utf8"));
+        if (!config.auths) {
+          config.auths = {};
+        }
+        config.auths[loginServer] = { auth: authenticationToken };
+      } catch (err) {
+        // if the file is invalid, just overwrite it
+        config = undefined;
+      }
+    }
+    if (!config) {
+      config = {
+        auths: {
+          [loginServer]: {
+            auth: authenticationToken,
+          },
+        },
+      };
+    }
+    core.debug(`Writing docker config contents to ${dockerConfigPath}`);
+    fs.writeFileSync(dockerConfigPath, JSON.stringify(config));
+    core.exportVariable("DOCKER_CONFIG", dirPath);
+    console.log("DOCKER_CONFIG environment variable is set");
+  } catch (error) {
+    core.setFailed(error);
+  }
 }
 
 async function acrLogin(cred) {
