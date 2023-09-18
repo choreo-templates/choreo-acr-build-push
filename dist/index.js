@@ -3462,7 +3462,10 @@ async function dockerHubLogin(cred) {
   try {
     const username = cred.credentials.registryUser;
     const password = cred.credentials.registryPassword;
-    const loginServer = "https://index.docker.io/v1/";
+    let loginServer = "https://index.docker.io/v1/";
+    if (!cred.credentials.registry.includes("docker.io")) {
+      loginServer = cred.credentials.registry;
+    }
     const authenticationToken = Buffer.from(`${username}:${password}`).toString(
       "base64"
     );
