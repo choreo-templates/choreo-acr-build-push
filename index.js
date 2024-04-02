@@ -5,8 +5,22 @@ const fs = require("fs");
 const path = require("path");
 
 const choreoApp = process.env.CHOREO_GITOPS_REPO;
+const type = core.getInput('type');
 
 async function run() {
+  switch (type) {
+    case "login_and_push":
+      login_and_push();
+      break;
+    case "login":
+      login();
+      break;
+    default:
+      throw new Error(`Unknown action type: ${type}`);
+  }
+}
+
+async function login_and_push() {
   try {
     const fileContents = fs.readFileSync(
       `/home/runner/workspace/${choreoApp}/${process.env.REG_CRED_FILE_NAME}`,
@@ -28,6 +42,35 @@ async function run() {
       if (cred.type == "DOCKER_HUB") {
         await dockerHubLogin(cred);
         await dockerPush(cred);
+      }
+    }
+  } catch (error) {
+    core.setFailed(error.message);
+  }
+}
+
+async function login() {
+  try {
+    const fileContents = fs.readFileSync(
+      `/home/runner/workspace/${choreoApp}/${process.env.REG_CRED_FILE_NAME}`,
+      "utf8"
+    );
+    let data = JSON.parse(fileContents);
+    for (const cred of data) {
+      if (cred?.is_cdp === undefined || cred?.is_cdp) {
+        continue;
+      }
+      if (cred.type == "ACR") {
+        await acrLogin(cred);
+      }
+      if (cred.type == "ECR") {
+        await ecrLoginPrivate(cred);
+      }
+      if (cred.type == "GCP") {
+        await gcpArtifactRegistryLogin(cred);
+      }
+      if (cred.type == "DOCKER_HUB") {
+        await dockerHubLogin(cred);
       }
     }
   } catch (error) {
@@ -145,6 +188,43 @@ async function dockerHubLogin(cred) {
   } catch (error) {
     core.setFailed(error);
   }
+}
+
+async function gcpArtifactRegistryLogin(cred) {
+  const registryPassword = cred.credentials.registryPassword;
+  const keyContex = Buffer.from(registryPassword, 'base64').toString();
+  const region = cred.credentials.region;
+  const registry = cred.credentials.registry;
+  const repository = cred.credentials.repository;
+  const projectId = JSON.parse(keyContex)['project_id'];
+  const newImageTag = `${region}-docker.pkg.dev/${projectId}/${repository}/${choreoApp}:${process.env.NEW_SHA}`;
+  const keyPath = 'gcp-key.json';
+  
+  fs.writeFileSync(keyPath, keyContex, 'utf-8');
+  var child = spawn(`
+    cat ${keyPath} | docker login -u _json_key --password-stdin ${registry} && \
+    rm -rf gcp-key.json`,
+    {
+    shell: true
+  });
+  var data = "";
+  for await (const chunk of child.stdout) {
+    console.log(chunk.toString());
+    data += chunk;
+  }
+  var error = "";
+  for await (const chunk of child.stderr) {
+    console.error(chunk.toString());
+    error += chunk;
+  }
+  const exitCode = await new Promise((resolve, reject) => {
+    child.on("close", resolve);
+  });
+
+  if (exitCode) {
+    throw new Error(`subprocess error exit ${exitCode}, ${error}`);
+  }
+  return data;
 }
 
 async function acrLogin(cred) {
