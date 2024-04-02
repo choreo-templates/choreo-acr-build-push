@@ -16,7 +16,7 @@ async function run() {
       login();
       break;
     default:
-      throw new Error(`Unknown action type: ${type}`);
+      login_and_push();
   }
 }
 
