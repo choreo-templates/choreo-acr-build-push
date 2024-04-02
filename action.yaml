@@ -3,3 +3,8 @@ description: "login and push images to container registries"
 runs:
   using: "node16"
   main: "dist/index.js"
+inputs:
+  type:
+    description: 'Type of the action'
+    required: false
+    default: 'login_and_push'
