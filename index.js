@@ -273,6 +273,11 @@ async function acrLogin(cred) {
 }
 
 async function dockerPush(cred) {
+  // We do a docker login to increase the image pull rate limit and this registry id is added as a choreo-docker-hub
+  // so we skip the docker push for this registry
+  if (cred.registry_id == "choreo-docker-hub") {
+    return;
+  }
   const tempImage = process.env.DOCKER_TEMP_IMAGE;
   const registryUrl = cred.credentials.registry;
   const newImageTag = `${registryUrl}/${choreoApp}:${process.env.NEW_SHA}`;
