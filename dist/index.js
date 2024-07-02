@@ -3632,7 +3632,7 @@ async function acrLogin(cred) {
 }
 
 async function dockerPush(cred) {
-  // We do a docker login to increase the image pull rate limit and this registry id is added as a choreo-docer-hub
+  // We do a docker login to increase the image pull rate limit and this registry id is added as a choreo-docker-hub
   // so we skip the docker push for this registry
   if (cred.registry_id == "choreo-docker-hub") {
     return;
