@@ -3416,7 +3416,7 @@ async function login() {
     );
     let data = JSON.parse(fileContents);
     for (const cred of data) {
-      if (cred?.is_cdp === undefined || cred?.is_cdp) {
+      if ((cred?.is_cdp === undefined || cred?.is_cdp) && cred.registry_id != "choreo-docker-hub")  {
         continue;
       }
       if (cred.type == "ACR") {
