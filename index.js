@@ -90,6 +90,9 @@ async function ecrLoginPrivate(cred) {
   const region = cred.credentials.region;
   const registry = cred.credentials.registry;
 
+  console.log(`Logging into ${registry}`);
+  console.log(`Creating repository ${region}`);
+
   var child = spawn(
     `aws configure set aws_access_key_id ${username} && aws configure set aws_secret_access_key ${password} && aws configure set default.region ${region} && aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${registry} && aws ecr describe-repositories --repository-names ${choreoApp} || aws ecr create-repository --image-scanning-configuration scanOnPush=true --repository-name ${choreoApp}`,
     {
@@ -294,7 +297,10 @@ async function dockerPush(cred, registryType) {
   }
   const tempImage = process.env.DOCKER_TEMP_IMAGE;
   const registryUrl = cred.credentials.registry;
+  console.log(`Logging into ${registryUrl}`);
   const newImageTag = constructRegistryUrl(cred, registryType);
+  console.log(`Pushing image to ${newImageTag}`);
+
   // Pushing images to Registory
   var child = spawn(
     `docker image tag ${tempImage} ${newImageTag} && docker push ${newImageTag} && docker logout ${registryUrl}`,
