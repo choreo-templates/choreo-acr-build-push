@@ -94,7 +94,7 @@ async function ecrLoginPrivate(cred) {
   console.log(`Creating repository ${region}`);
 
   var child = spawn(
-    `aws configure set aws_access_key_id ${username} && aws configure set aws_secret_access_key ${password} && aws configure set default.region ${region} && aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${registry} && aws ecr describe-repositories --repository-names ${choreoApp} || aws ecr create-repository --image-scanning-configuration scanOnPush=true --repository-name ${choreoApp}`,
+    `aws configure set aws_access_key_id ${username} && aws configure set aws_secret_access_key ${password} && aws configure set default.region ${region} && aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${registry} && aws ecr describe-repositories --repository-names ${organizationUuid} || aws ecr create-repository --image-scanning-configuration scanOnPush=true --repository-name ${organizationUuid}`,
     {
       shell: true,
     }
