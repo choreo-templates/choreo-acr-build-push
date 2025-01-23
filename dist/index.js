@@ -3632,7 +3632,6 @@ async function acrLogin(cred) {
       };
     }
     core.debug(`Writing docker config contents to ${dockerConfigPath}`);
-    console.log(config);
     fs.writeFileSync(dockerConfigPath, JSON.stringify(config));
     core.exportVariable("DOCKER_CONFIG", dirPath);
     console.log("DOCKER_CONFIG environment variable is set");
@@ -3660,8 +3659,7 @@ async function dockerPush(cred, registryType) {
   console.log(`Logging into ${registryUrl}`);
   const newImageTag = constructRegistryUrl(cred, registryType);
   console.log(`Pushing image to ${newImageTag}`);
-  console.log(process.env.DOCKER_CONFIG);
-  console.log(fs.readFileSync(`${process.env.DOCKER_CONFIG}/config.json`, 'utf-8'));
+
   // Pushing images to Registory
   var child = spawn(
     `docker image tag ${tempImage} ${newImageTag} && docker push ${newImageTag} && docker logout ${registryUrl}`,
