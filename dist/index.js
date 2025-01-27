@@ -3442,6 +3442,9 @@ async function login() {
       if (cred.type == DOCKER_HUB) {
         await dockerHubLogin(cred);
       }
+      if (cred.type == VULTR) {
+        await acrLogin(cred);
+      }
     }
   } catch (error) {
     core.setFailed(error.message);
