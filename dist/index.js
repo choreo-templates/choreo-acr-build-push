@@ -3371,6 +3371,7 @@ const ACR = "ACR";
 const ECR = "ECR";
 const DOCKER_HUB = "DOCKER_HUB";
 const GCP = "GCP";
+const VULTR = "VULTR";
 
 async function run() {
   switch (type) {
@@ -3407,6 +3408,10 @@ async function login_and_push() {
       if (cred.type == DOCKER_HUB) {
         await dockerHubLogin(cred);
         await dockerPush(cred, DOCKER_HUB);
+      }
+      if (cred.type == VULTR) {
+        await acrLogin(cred);
+        await dockerPush(cred, VULTR);
       }
     }
   } catch (error) {
